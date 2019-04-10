@@ -1,0 +1,17 @@
+import numpy as np
+import matplotlib.pyplot as plt
+import healpy as hp
+from astropy.io import fits
+
+f=[100,143,217,353,545,857]
+
+def reduceimage(f):
+    NSIDE=2048
+    map=hp.read_map('/home/vbonjean/PLANCK/HFI_SkyMap_'+str(f)+'_2048_R3.01_full.fits')
+    mapred=hp.ud_grade(map,256)
+    hp.write_map('HFI_SkyMap_reduced_'+str(f)+'.fits', mapred)
+
+def plotimage(f):
+    image=hp.read_map('../data/HFI_SkyMap_reduced_'+str(f)+'.fits')
+    hp.mollview(image)
+    plt.show()

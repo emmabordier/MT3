@@ -1,0 +1,30 @@
+import numpy as np
+import matplotlib.pyplot as plt
+import healpy as hp
+from astropy.io import fits
+import os as os
+from astropy import wcs
+
+f=[100,143,217,353,545,857]
+
+def writefits(array, fname, overwrite=False):
+
+  if (os.path.isfile(fname)):
+    if (overwrite == False):
+      print("File already exists!, skiping")
+      return
+    else:
+      print("File already exists!, overwriting")
+      os.remove(fname)
+  try: 
+    hdu = fits.PrimaryHDU(array)
+    hdu.writeto(fname)
+  except:
+    print('b1') 
+    hdu = pf.PrimaryHDU(fname)
+    print('b2') 
+    hdu.writeto(array)
+
+  print("File: %s saved!" % fname)
+
+  return
